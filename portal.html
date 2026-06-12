@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="id" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebGIS Portal — Sistem Informasi Geografis</title>
-    <meta name="description" content="Portal WebGIS — Direktori modul dan proyek akhir mata kuliah Sistem Informasi Geografis.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description"
+        content="Portal WebGIS — Direktori modul dan proyek akhir mata kuliah Sistem Informasi Geografis.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         /* ══ DESIGN TOKENS ══ */
@@ -18,56 +22,65 @@
 
         /* ══ DARK THEME (default) ══ */
         [data-theme="dark"] {
-            --bg-page:      #0A0F1E;
-            --bg-surface:   #111827;
-            --bg-card:      #141D2F;
-            --bg-card-hover:#1A2540;
-            --border:       rgba(255,255,255,0.07);
-            --border-hover: rgba(99,102,241,0.5);
+            --bg-page: #0A0F1E;
+            --bg-surface: #111827;
+            --bg-card: #141D2F;
+            --bg-card-hover: #1A2540;
+            --border: rgba(255, 255, 255, 0.07);
+            --border-hover: rgba(99, 102, 241, 0.5);
             --text-primary: #F1F5F9;
-            --text-secondary:#94A3B8;
-            --text-muted:   #64748B;
-            --primary:      #6366F1;
-            --primary-glow: rgba(99,102,241,0.25);
-            --accent:       #06B6D4;
-            --accent-2:     #10B981;
-            --accent-3:     #F43F5E;
-            --nav-bg:       rgba(10,15,30,0.85);
-            --glass:        rgba(17,24,39,0.8);
-            --shine:        rgba(255,255,255,0.03);
-            --shadow-card:  0 4px 24px rgba(0,0,0,0.4);
-            --shadow-glow:  0 0 40px rgba(99,102,241,0.15);
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --primary: #6366F1;
+            --primary-glow: rgba(99, 102, 241, 0.25);
+            --accent: #06B6D4;
+            --accent-2: #10B981;
+            --accent-3: #F43F5E;
+            --nav-bg: rgba(10, 15, 30, 0.85);
+            --glass: rgba(17, 24, 39, 0.8);
+            --shine: rgba(255, 255, 255, 0.03);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
             --gradient-hero: linear-gradient(135deg, #0A0F1E 0%, #111827 50%, #0D1B2E 100%);
-            --dot-color:    rgba(255,255,255,0.04);
+            --dot-color: rgba(255, 255, 255, 0.04);
         }
 
         /* ══ LIGHT THEME ══ */
         [data-theme="light"] {
-            --bg-page:      #F0F4FF;
-            --bg-surface:   #FFFFFF;
-            --bg-card:      #FFFFFF;
-            --bg-card-hover:#F8FAFF;
-            --border:       #E2E8F0;
+            --bg-page: #F0F4FF;
+            --bg-surface: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --bg-card-hover: #F8FAFF;
+            --border: #E2E8F0;
             --border-hover: #6366F1;
             --text-primary: #0F172A;
-            --text-secondary:#475569;
-            --text-muted:   #94A3B8;
-            --primary:      #4F46E5;
-            --primary-glow: rgba(79,70,229,0.12);
-            --accent:       #0891B2;
-            --accent-2:     #059669;
-            --accent-3:     #E11D48;
-            --nav-bg:       rgba(240,244,255,0.9);
-            --glass:        rgba(255,255,255,0.9);
-            --shine:        rgba(255,255,255,0.5);
-            --shadow-card:  0 4px 24px rgba(79,70,229,0.08);
-            --shadow-glow:  0 0 40px rgba(79,70,229,0.1);
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --primary: #4F46E5;
+            --primary-glow: rgba(79, 70, 229, 0.12);
+            --accent: #0891B2;
+            --accent-2: #059669;
+            --accent-3: #E11D48;
+            --nav-bg: rgba(240, 244, 255, 0.9);
+            --glass: rgba(255, 255, 255, 0.9);
+            --shine: rgba(255, 255, 255, 0.5);
+            --shadow-card: 0 4px 24px rgba(79, 70, 229, 0.08);
+            --shadow-glow: 0 0 40px rgba(79, 70, 229, 0.1);
             --gradient-hero: linear-gradient(135deg, #EEF2FF 0%, #F0F4FF 50%, #E8F4FF 100%);
-            --dot-color:    rgba(79,70,229,0.04);
+            --dot-color: rgba(79, 70, 229, 0.04);
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: var(--font-sans);
@@ -101,8 +114,24 @@
             z-index: 0;
             transition: opacity 0.4s;
         }
-        .orb-1 { width: 500px; height: 500px; background: var(--primary-glow); top: -100px; left: -100px; opacity: 0.6; }
-        .orb-2 { width: 400px; height: 400px; background: rgba(6,182,212,0.1); bottom: -80px; right: -80px; opacity: 0.5; }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary-glow);
+            top: -100px;
+            left: -100px;
+            opacity: 0.6;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(6, 182, 212, 0.1);
+            bottom: -80px;
+            right: -80px;
+            opacity: 0.5;
+        }
 
         /* ── Navbar ── */
         .navbar {
@@ -179,6 +208,7 @@
             font-size: 1rem;
             transition: var(--transition);
         }
+
         .theme-toggle:hover {
             background: var(--primary);
             border-color: var(--primary);
@@ -344,7 +374,9 @@
             background: var(--bg-card-hover);
         }
 
-        .card:hover::before { opacity: 1; }
+        .card:hover::before {
+            opacity: 1;
+        }
 
         /* Number badge */
         .card-num {
@@ -382,10 +414,25 @@
         }
 
         /* Card themes */
-        .card[data-type="p01"] .card-icon-wrap { background: rgba(99,102,241,0.15); color: #818CF8; }
-        .card[data-type="p02"] .card-icon-wrap { background: rgba(6,182,212,0.15); color: #22D3EE; }
-        .card[data-type="p03"] .card-icon-wrap { background: rgba(16,185,129,0.15); color: #34D399; }
-        .card[data-type="uas"] .card-icon-wrap { background: rgba(244,63,94,0.15); color: #FB7185; }
+        .card[data-type="p01"] .card-icon-wrap {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818CF8;
+        }
+
+        .card[data-type="p02"] .card-icon-wrap {
+            background: rgba(6, 182, 212, 0.15);
+            color: #22D3EE;
+        }
+
+        .card[data-type="p03"] .card-icon-wrap {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34D399;
+        }
+
+        .card[data-type="uas"] .card-icon-wrap {
+            background: rgba(244, 63, 94, 0.15);
+            color: #FB7185;
+        }
 
         .card-tag {
             font-size: 0.7rem;
@@ -435,7 +482,10 @@
             transition: var(--transition);
         }
 
-        .card:hover .card-footer { color: var(--primary); }
+        .card:hover .card-footer {
+            color: var(--primary);
+        }
+
         .card:hover .card-footer .arrow {
             background: var(--primary);
             color: white;
@@ -453,27 +503,92 @@
             padding: 36px 40px;
         }
 
-        .card-uas::before { background: rgba(255,255,255,0.05); }
-        .card-uas:hover { border-color: rgba(255,255,255,0.2); }
+        .card-uas::before {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .card-uas:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+        }
 
         .card-uas .card-icon-wrap {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             width: 64px;
             height: 64px;
             font-size: 1.8rem;
             flex-shrink: 0;
+            transition: var(--transition);
         }
 
-        .card-uas .card-tag { color: rgba(255,255,255,0.6); }
-        .card-uas .card-title { color: white; font-size: 1.6rem; }
-        .card-uas .card-desc { color: rgba(255,255,255,0.8); font-size: 1rem; }
-        .card-uas .card-footer { color: white; margin-top: 0; }
-        .card-uas .card-num { color: rgba(255,255,255,0.08); }
-        .card-uas .card-footer .arrow { background: rgba(255,255,255,0.2); color: white; }
-        .card-uas:hover .card-footer .arrow { background: white; color: var(--primary); }
+        .card-uas:hover .card-icon-wrap {
+            background: rgba(244, 63, 94, 0.15);
+            color: #FB7185;
+        }
 
-        .card-uas-text { flex: 1; }
+        .card-uas .card-tag {
+            color: rgba(255, 255, 255, 0.6);
+            transition: var(--transition);
+        }
+
+        .card-uas:hover .card-tag {
+            color: var(--text-muted);
+        }
+
+        .card-uas .card-title {
+            color: white;
+            font-size: 1.6rem;
+            transition: var(--transition);
+        }
+
+        .card-uas:hover .card-title {
+            color: var(--text-primary);
+        }
+
+        .card-uas .card-desc {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .card-uas:hover .card-desc {
+            color: var(--text-secondary);
+        }
+
+        .card-uas .card-footer {
+            color: white;
+            margin-top: 0;
+            transition: var(--transition);
+        }
+
+        .card-uas:hover .card-footer {
+            color: var(--primary);
+        }
+
+        .card-uas .card-num {
+            color: rgba(255, 255, 255, 0.08);
+            transition: var(--transition);
+        }
+
+        .card-uas:hover .card-num {
+            color: var(--primary-glow);
+        }
+
+        .card-uas .card-footer .arrow {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: var(--transition);
+        }
+
+        .card-uas:hover .card-footer .arrow {
+            background: var(--primary);
+            color: white;
+        }
+
+        .card-uas-text {
+            flex: 1;
+        }
 
         /* ── Footer ── */
         .footer {
@@ -491,37 +606,89 @@
 
         /* ══ ANIMATIONS ══ */
         @keyframes fadeSlideDown {
-            from { opacity: 0; transform: translateY(-12px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .card { animation: fadeSlideUp 0.5s var(--ease) both; }
-        .card:nth-child(1) { animation-delay: 0.15s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.25s; }
-        .card:nth-child(4) { animation-delay: 0.3s; }
+        .card {
+            animation: fadeSlideUp 0.5s var(--ease) both;
+        }
+
+        .card:nth-child(1) {
+            animation-delay: 0.15s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.25s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
 
         @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ══ RESPONSIVE ══ */
         @media (max-width: 900px) {
-            .grid { grid-template-columns: 1fr 1fr; }
-            .card-uas { flex-direction: column; text-align: center; }
-            .card-uas .card-footer { justify-content: center; }
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .card-uas {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .card-uas .card-footer {
+                justify-content: center;
+            }
         }
 
         @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
-            .navbar { padding: 0 16px; }
-            .hero { padding: 48px 16px 40px; }
-            .stats-bar { gap: 20px; }
-            .stat-divider { display: none; }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 0 16px;
+            }
+
+            .hero {
+                padding: 48px 16px 40px;
+            }
+
+            .stats-bar {
+                gap: 20px;
+            }
+
+            .stat-divider {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- Ambient orbs -->
@@ -535,7 +702,7 @@
             WebGIS Portal
         </a>
         <div class="navbar-right">
-            <span class="nav-pill">SIG 2024/2025</span>
+            <span class="nav-pill">SIG 2025/2026</span>
             <button class="theme-toggle" id="themeToggle" title="Toggle tema" aria-label="Toggle dark/light mode">
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
@@ -552,7 +719,8 @@
             Direktori Proyek<br>
             <span class="gradient-text">WebGIS Interaktif</span>
         </h1>
-        <p>Kumpulan modul pembelajaran dan proyek akhir mata kuliah Sistem Informasi Geografis. Pilih modul untuk memulai eksplorasi.</p>
+        <p>Kumpulan modul pembelajaran dan proyek akhir mata kuliah Sistem Informasi Geografis. Pilih modul untuk
+            memulai eksplorasi.</p>
 
         <div class="stats-bar">
             <div class="stat-item">
@@ -585,7 +753,8 @@
                 </div>
                 <div class="card-tag">Pertemuan 01</div>
                 <h2 class="card-title">Geometri Dasar</h2>
-                <p class="card-desc">Menggambar dan mengelola geometri spasial: titik (SPBU), garis (Jalan), dan poligon (Kavling) dengan operasi CRUD.</p>
+                <p class="card-desc">Menggambar dan mengelola geometri spasial: titik (SPBU), garis (Jalan), dan poligon
+                    (Kavling) dengan operasi CRUD.</p>
                 <div class="card-footer">
                     Buka Modul
                     <div class="arrow"><i class="fas fa-arrow-right"></i></div>
@@ -600,7 +769,8 @@
                 </div>
                 <div class="card-tag">Pertemuan 02</div>
                 <h2 class="card-title">Haversine &amp; Tematik</h2>
-                <p class="card-desc">Pemetaan sosial dengan analisis radius jarak Haversine dan visualisasi tematik data kemiskinan penduduk.</p>
+                <p class="card-desc">Pemetaan sosial dengan analisis radius jarak Haversine dan visualisasi tematik data
+                    kemiskinan penduduk.</p>
                 <div class="card-footer">
                     Buka Modul
                     <div class="arrow"><i class="fas fa-arrow-right"></i></div>
@@ -615,7 +785,8 @@
                 </div>
                 <div class="card-tag">Pertemuan 03</div>
                 <h2 class="card-title">Analisis Spasial</h2>
-                <p class="card-desc">Choropleth Map dinamis berbasis Point-in-Polygon — pewarnaan otomatis area kavling oleh kepadatan warga miskin.</p>
+                <p class="card-desc">Choropleth Map dinamis berbasis Point-in-Polygon — pewarnaan otomatis area kavling
+                    oleh kepadatan warga miskin.</p>
                 <div class="card-footer">
                     Buka Modul
                     <div class="arrow"><i class="fas fa-arrow-right"></i></div>
@@ -631,7 +802,8 @@
                 <div class="card-uas-text">
                     <div class="card-tag">Proyek Akhir — Final UAS</div>
                     <h2 class="card-title">Smart City WebGIS</h2>
-                    <p class="card-desc">Sistem komprehensif manajemen kawasan kota dengan dashboard analitik, autentikasi peran, dan visualisasi peta interaktif real-time.</p>
+                    <p class="card-desc">Sistem komprehensif manajemen kawasan kota dengan dashboard analitik,
+                        autentikasi peran, dan visualisasi peta interaktif real-time.</p>
                     <div class="card-footer" style="margin-top:20px;">
                         Buka Aplikasi
                         <div class="arrow"><i class="fas fa-arrow-right"></i></div>
@@ -650,7 +822,7 @@
     <script>
         // ── Theme toggle ──
         const html = document.documentElement;
-        const btn  = document.getElementById('themeToggle');
+        const btn = document.getElementById('themeToggle');
         const icon = document.getElementById('themeIcon');
 
         // Persist preference
@@ -670,4 +842,5 @@
         }
     </script>
 </body>
+
 </html>
