@@ -5,6 +5,32 @@
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
+// ── Theme toggle ──
+(function() {
+    const html = document.documentElement;
+    const saved = localStorage.getItem('portal-theme') || 'dark';
+    setUserTheme(saved);
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn  = document.getElementById('userThemeToggle');
+        const icon = document.getElementById('userThemeIcon');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setUserTheme(next);
+            localStorage.setItem('portal-theme', next);
+        });
+        function updateIcon() {
+            if (icon) icon.className = html.getAttribute('data-theme') === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        updateIcon();
+    });
+    function setUserTheme(t) {
+        html.setAttribute('data-theme', t);
+        const icon = document.getElementById('userThemeIcon');
+        if (icon) icon.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+})();
+
 // ── Clock ──
 function updateClock() {
     const now = new Date();

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Admin Layout — sidebar + topbar
  * Include di awal setiap halaman admin setelah auth check.
@@ -8,7 +8,7 @@ $user = currentUser();
 $initial = strtoupper(substr($user['nama_lengkap'] ?: $user['username'], 0, 1));
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,6 +104,12 @@ $initial = strtoupper(substr($user['nama_lengkap'] ?: $user['username'], 0, 1));
             </div>
             <a href="<?= app_url('panel_admin/peta_admin.php') ?>" class="btn btn-primary btn-sm">
                 <i class="fas fa-map"></i> Buka Peta
+            </a>
+            <button class="btn btn-ghost btn-sm" id="adminThemeToggle" title="Toggle tema" aria-label="Toggle dark/light mode" style="padding:8px 10px;">
+                <i class="fas fa-moon" id="adminThemeIcon"></i>
+            </button>
+            <a href="<?= app_url('../portal.html') ?>" class="btn btn-ghost btn-sm" title="Kembali ke Portal WebGIS">
+                <i class="fas fa-home"></i> Portal
             </a>
         </div>
     </div>

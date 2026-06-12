@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * User Layout — sidebar + topbar (read-only mode, beda style dari admin)
  * Variables expected from parent: $pageTitle, $activeNav
@@ -7,7 +7,7 @@ $user = currentUser();
 $initial = strtoupper(substr($user['nama_lengkap'] ?: $user['username'], 0, 1));
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,6 +80,12 @@ $initial = strtoupper(substr($user['nama_lengkap'] ?: $user['username'], 0, 1));
             <span class="badge badge-success" style="font-size:0.7rem;padding:5px 10px;">
                 <i class="fas fa-eye"></i> Mode Baca
             </span>
+            <button class="btn btn-ghost btn-sm" id="userThemeToggle" title="Toggle tema" aria-label="Toggle dark/light mode" style="padding:8px 10px;">
+                <i class="fas fa-moon" id="userThemeIcon"></i>
+            </button>
+            <a href="<?= app_url('../portal.html') ?>" class="btn btn-ghost btn-sm" title="Kembali ke Portal WebGIS">
+                <i class="fas fa-home"></i> Portal
+            </a>
         </div>
     </div>
     <div class="admin-content">

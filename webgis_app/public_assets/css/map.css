@@ -763,3 +763,120 @@
         bottom: 66px;
     }
 }
+
+/* ══════════════════════════════
+   DARK THEME OVERRIDES FOR MAPS
+   ══════════════════════════════ */
+[data-theme="dark"] {
+    .map-wrap,
+    #admin-map,
+    #user-map,
+    .leaflet-container {
+        background: #0f172a;
+    }
+
+    .leaflet-control-attribution {
+        background: rgba(15, 23, 42, 0.9) !important;
+        border-color: var(--border-light);
+    }
+
+    .leaflet-control-zoom a,
+    .leaflet-draw-toolbar a {
+        background: var(--bg-surface) !important;
+        color: var(--text-primary) !important;
+        border-color: var(--border-light) !important;
+    }
+
+    .leaflet-control-zoom a:hover,
+    .leaflet-draw-toolbar a:hover {
+        background: var(--bg-elevated) !important;
+        color: var(--primary-light) !important;
+    }
+
+    .map-sidebar {
+        background: rgba(30, 41, 59, 0.95);
+        border-color: var(--border-light);
+    }
+
+    .map-panel-icon {
+        background: rgba(99, 102, 241, 0.15);
+        color: var(--primary-light);
+        border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    .layer-item:hover {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: var(--border-light);
+    }
+
+    .qs-item {
+        background: var(--bg-base);
+        border-color: var(--border-light);
+    }
+
+    .map-analysis {
+        background: rgba(30, 41, 59, 0.95);
+        border-color: var(--border-light);
+    }
+
+    .map-analysis button {
+        background: var(--bg-surface);
+        color: var(--text-secondary);
+        border-color: var(--border-light);
+    }
+
+    .map-analysis button:hover {
+        background: var(--bg-elevated);
+        color: var(--text-primary);
+    }
+
+    .map-analysis button.active {
+        color: #FFFFFF;
+        background: var(--primary-dark);
+        border-color: var(--primary-dark);
+    }
+
+    .spbu-panel {
+        background: rgba(30, 41, 59, 0.95);
+        border-color: var(--border-light);
+    }
+
+    .spbu-result {
+        background: var(--bg-base);
+        border-color: var(--border-light);
+    }
+
+    .spbu-result-distance {
+        color: var(--primary-light);
+    }
+
+    .leaflet-popup-content-wrapper {
+        background: var(--bg-surface) !important;
+        border-color: var(--border-light);
+    }
+
+    .leaflet-popup-tip {
+        background: var(--bg-surface) !important;
+    }
+
+    .map-legend {
+        background: rgba(30, 41, 59, 0.95);
+        border-color: var(--border-light);
+    }
+
+    .legend-area {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .map-loading {
+        color: var(--text-primary);
+        background: rgba(15, 23, 42, 0.85);
+    }
+
+    .read-only-badge {
+        color: #6EE7B7;
+        background: rgba(52, 211, 153, 0.15);
+        border-color: rgba(52, 211, 153, 0.3);
+    }
+}
+

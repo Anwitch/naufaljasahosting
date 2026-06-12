@@ -362,3 +362,55 @@ body.admin-page {
     .admin-main { margin-left: 0; }
     .stats-grid { grid-template-columns: 1fr; }
 }
+
+/* ══════════════════════════════
+   DARK THEME OVERRIDES FOR PANEL
+   ══════════════════════════════ */
+[data-theme="dark"] {
+    .nav-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary);
+    }
+
+    .nav-item.active {
+        background: var(--primary-glow);
+        color: var(--primary-light);
+    }
+
+    .sidebar-footer {
+        background: #090d16;
+    }
+
+    .user-info {
+        background: #111827;
+    }
+
+    .user-avatar {
+        background: var(--primary-glow);
+        color: var(--primary-light);
+    }
+
+    .topbar-time {
+        background: var(--bg-elevated);
+        border-color: var(--border-light);
+    }
+
+    .search-box input {
+        background: var(--bg-surface);
+        border-color: var(--border-light);
+    }
+
+    .map-sidebar-floating {
+        background: var(--bg-surface);
+        border-color: var(--border-light);
+    }
+
+    /* Stat card styles for dark theme */
+    .stat-card.primary   .stat-icon { background: rgba(37, 99, 235, 0.15); color: #818CF8; }
+    .stat-card.success   .stat-icon { background: rgba(16, 185, 129, 0.15); color: #34D399; }
+    .stat-card.danger    .stat-icon { background: rgba(239, 68, 68, 0.15); color: #F87171; }
+    .stat-card.warning   .stat-icon { background: rgba(245, 158, 11, 0.15); color: #FCD34D; }
+    .stat-card.info      .stat-icon { background: rgba(14, 165, 233, 0.15); color: #38BDF8; }
+    .stat-card.violet    .stat-icon { background: rgba(124, 58, 237, 0.15); color: #A78BFA; }
+}
+

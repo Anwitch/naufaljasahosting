@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/../core_config/database.php';
 require_once __DIR__ . '/../core_config/middleware_auth.php';
 requireRole('admin');
@@ -113,7 +113,7 @@ function badgeStatus($status) {
             <strong id="mapKategori"></strong><br>
             <span style="color: var(--text-secondary);" id="mapDeskripsi"></span>
         </div>
-        <div id="miniMapLihat" style="height:300px;border-radius:8px;border:1px solid #E5E7EB;"></div>
+        <div id="miniMapLihat" style="height:300px;border-radius:8px;border:1px solid var(--border-light);"></div>
     </div>
 </div>
 
@@ -177,7 +177,11 @@ function lihatLokasi(r) {
     setTimeout(() => {
         if(!mapInstance) {
             mapInstance = L.map('miniMapLihat');
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(mapInstance);
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const tileUrl = isDark 
+                ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+                : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+            L.tileLayer(tileUrl).addTo(mapInstance);
         }
         if(mapMarker) mapInstance.removeLayer(mapMarker);
         

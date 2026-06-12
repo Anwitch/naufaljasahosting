@@ -87,11 +87,26 @@ function initMap() {
 
     L.control.zoom({ position: 'bottomright' }).addTo(state.map);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const tileUrl = isDark 
+        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+    const tileLayer = L.tileLayer(tileUrl, {
         attribution: '© OpenStreetMap, © CARTO',
         subdomains: 'abcd',
         maxZoom: 20
     }).addTo(state.map);
+
+    // Dynamic theme updater for tile layer
+    const observer = new MutationObserver(() => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        tileLayer.setUrl(dark 
+            ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+            : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+        );
+    });
+    observer.observe(document.documentElement, { attributes: true });
 }
 
 /* ── Fetch GeoJSON ── */

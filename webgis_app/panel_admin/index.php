@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/../core_config/database.php';
 require_once __DIR__ . '/../core_config/middleware_auth.php';
 requireRole('admin');
@@ -47,11 +47,11 @@ require_once __DIR__ . '/partials/header.php';
 ?>
 
 <!-- ── Quick Access Map ── -->
-<div class="card" style="background: #EFF6FF; border: 1px solid #BFDBFE; margin-bottom: 24px;">
+<div class="card" style="background: var(--primary-glow); border: 1px solid var(--primary-light); margin-bottom: 24px;">
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
         <div>
-            <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:6px; color:#1E3A8A;">🗺️ Buka Peta Interaktif</h3>
-            <p style="color:#3B82F6; font-size:0.88rem; max-width:500px;">
+            <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:6px; color:var(--text-primary);">🗺️ Buka Peta Interaktif</h3>
+            <p style="color:var(--text-secondary); font-size:0.88rem; max-width:500px;">
                 Tambahkan, edit, dan analisis data spasial langsung di peta. Mendukung drawing tool untuk semua layer data.
             </p>
         </div>
@@ -127,9 +127,9 @@ require_once __DIR__ . '/partials/header.php';
         <?php if ($recentSpbu): ?>
         <div style="display:flex; flex-direction:column; gap:8px;">
             <?php foreach ($recentSpbu as $s): ?>
-            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:#F9FAFB; border:1px solid #E5E7EB; border-radius:8px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--bg-elevated); border:1px solid var(--border-light); border-radius:8px;">
                 <div>
-                    <div style="font-weight:600; font-size:0.88rem;"><?= htmlspecialchars($s['nama']) ?></div>
+                    <div style="font-weight:600; font-size:0.88rem; color:var(--text-primary);"><?= htmlspecialchars($s['nama']) ?></div>
                     <div style="font-size:0.75rem; color:var(--text-muted);"><?= date('d M Y', strtotime($s['created_at'])) ?></div>
                 </div>
                 <span class="badge <?= $s['buka_24_jam'] ? 'badge-success' : 'badge-danger' ?>">
@@ -152,9 +152,9 @@ require_once __DIR__ . '/partials/header.php';
         <?php if ($recentWarga): ?>
         <div style="display:flex; flex-direction:column; gap:8px;">
             <?php foreach ($recentWarga as $w): ?>
-            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:#F9FAFB; border:1px solid #E5E7EB; border-radius:8px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:var(--bg-elevated); border:1px solid var(--border-light); border-radius:8px;">
                 <div>
-                    <div style="font-weight:600; font-size:0.88rem;"><?= htmlspecialchars($w['nama_kk']) ?></div>
+                    <div style="font-weight:600; font-size:0.88rem; color:var(--text-primary);"><?= htmlspecialchars($w['nama_kk']) ?></div>
                     <div style="font-size:0.75rem; color:var(--text-muted);">Rp <?= number_format($w['penghasilan'],0,',','.') ?>/bln · <?= $w['jumlah_tanggungan'] ?> tanggungan</div>
                 </div>
                 <span class="badge badge-warning"><?= $w['jumlah_tanggungan'] ?> org</span>

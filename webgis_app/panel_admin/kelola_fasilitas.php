@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/../core_config/database.php';
 require_once __DIR__ . '/../core_config/middleware_auth.php';
 requireRole('admin');
@@ -64,10 +64,10 @@ foreach($rows as $r) {
         </div>
         <div class="form-group"><label class="form-label">Radius Bantuan (meter) *</label><input type="number" name="radius_bantuan_meter" class="form-control" min="100" max="10000" step="50" value="1000" required></div>
         <div class="form-group"><label class="form-label">Pilih Lokasi di Peta</label>
-            <div id="miniMapTambah" style="height:200px;border-radius:8px;border:1px solid #E5E7EB;margin-bottom:10px;z-index:1;"></div>
+            <div id="miniMapTambah" style="height:200px;border-radius:8px;border:1px solid var(--border-light);margin-bottom:10px;z-index:1;"></div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                <input type="number" name="lat" id="latTambah" class="form-control" placeholder="Latitude" step="any" readonly style="background:#F9FAFB;">
-                <input type="number" name="lng" id="lngTambah" class="form-control" placeholder="Longitude" step="any" readonly style="background:#F9FAFB;">
+                <input type="number" name="lat" id="latTambah" class="form-control" placeholder="Latitude" step="any" readonly style="background:var(--bg-base); border-color:var(--border-light);">
+                <input type="number" name="lng" id="lngTambah" class="form-control" placeholder="Longitude" step="any" readonly style="background:var(--bg-base); border-color:var(--border-light);">
             </div>
         </div>
     </form>
@@ -104,7 +104,11 @@ window.openModal = function(id) {
         setTimeout(() => {
             if(!miniMap) {
                 miniMap = L.map('miniMapTambah').setView([-0.0583, 109.3448], 13);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(miniMap);
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                const tileUrl = isDark 
+                    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+                    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+                L.tileLayer(tileUrl).addTo(miniMap);
                 miniMap.on('click', function(e) {
                     const lat = e.latlng.lat;
                     const lng = e.latlng.lng;

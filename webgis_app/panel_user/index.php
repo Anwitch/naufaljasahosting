@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/../core_config/database.php';
 require_once __DIR__ . '/../core_config/middleware_auth.php';
 requireRole('user');
@@ -39,7 +39,7 @@ $activeNav = 'dashboard';
 require_once __DIR__ . '/partials/header.php';
 ?>
 
-<div class="card" style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+<div class="card" style="background: var(--bg-surface); border: 1px solid var(--border-light); margin-bottom: 24px;">
     <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:6px;color:var(--text-primary);">👋 Selamat Datang, <?= htmlspecialchars(currentUser()['nama_lengkap'] ?: currentUser()['username']) ?>!</h2>
     <p style="color:var(--text-secondary);font-size:0.9rem;max-width:600px;">
         Anda masuk sebagai <strong>Pengguna</strong>. Anda dapat melihat seluruh data spasial, analisis, dan berpartisipasi dengan mengirim Laporan Warga atau memberikan ulasan fasilitas.
@@ -97,10 +97,10 @@ require_once __DIR__ . '/partials/header.php';
     </div>
 </div>
 
-<div class="card" style="background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+<div class="card" style="background: var(--primary-glow); border: 1px solid var(--primary-light); margin-bottom: 24px;">
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
         <div>
-            <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:6px;">🗺️ Buka Peta Interaktif</h3>
+            <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:6px; color:var(--text-primary);">🗺️ Buka Peta Interaktif</h3>
             <p style="color:var(--text-secondary); font-size:0.88rem; max-width:500px;">
                 Lihat semua layer data spasial: SPBU, jalan, kavling, rumah ibadah, warga miskin, kawasan kumuh, dan analisis spasial.
             </p>
