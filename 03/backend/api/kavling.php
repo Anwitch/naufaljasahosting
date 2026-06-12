@@ -1,10 +1,10 @@
-﻿<?php
+<?php
 /**
  * kavling.php
  * Tanggung Jawab: Menangani operasi CRUD untuk entitas Kavling (Polygon).
  */
 
-require_once '../core_config/database.php';
+require_once __DIR__ . '/../../../webgis_app/core_config/database.php';
 require_once '../utils/response_helper.php';
 
 $pdo = Database::getConnection();
@@ -21,6 +21,7 @@ switch ($method) {
                     'geometry' => json_decode($row['geojson']),
                     'properties' => [
                         'id' => $row['id'],
+                        'nama' => $row['nama_pemilik'],
                         'nama_pemilik' => $row['nama_pemilik'],
                         'luas' => $row['luas'],
                         'created_at' => $row['created_at']

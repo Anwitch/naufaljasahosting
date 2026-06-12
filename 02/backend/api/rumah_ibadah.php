@@ -1,10 +1,10 @@
-﻿<?php
+<?php
 /**
  * rumah_ibadah.php
  * Tanggung Jawab: Operasi CRUD Rumah Ibadah + Endpoint analisis jangkauan Haversine.
  */
 
-require_once '../core_config/database.php';
+require_once __DIR__ . '/../../../webgis_app/core_config/database.php';
 require_once '../utils/response_helper.php';
 require_once '../utils/geo_helper.php';
 
@@ -31,7 +31,23 @@ switch ($method) {
 
             // Panggil geo_helper untuk mendapatkan warga miskin
             $warga = GeoHelper::getWargaDalamRadius($pdo, $pusatLat, $pusatLon, $radius);
-            sendSuccess($warga, 'Data jangkauan berhasil dihitung');
+            
+            // Format ke GeoJSON FeatureCollection sesuai kebutuhan frontend
+            $features = [];
+            foreach ($warga as $w) {
+                $features[] = [
+                    'type' => 'Feature',
+                    'geometry' => $w['geometry'],
+                    'properties' => [
+                        'id' => $w['id'],
+                        'nama' => $w['nama_kk'],
+                        'penghasilan' => $w['penghasilan'],
+                        'jumlah_tanggungan' => $w['jumlah_tanggungan'],
+                        'jarak_km' => $w['jarak_km']
+                    ]
+                ];
+            }
+            sendSuccess(['type' => 'FeatureCollection', 'features' => $features], 'Data jangkauan berhasil dihitung');
             
         } else {
             // GET Semua Rumah Ibadah (GeoJSON)

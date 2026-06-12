@@ -42,7 +42,7 @@ export const rumahIbadahService = createService('02/backend/api/rumah_ibadah.php
 export const wargaMiskinService = createService('02/backend/api/warga_miskin.php');
 export const haversineService = {
     getDalamRadius: async (id, radius) => {
-        const res = await fetch(`${BASE_URL}/02/backend/api/haversine.php?rumah_ibadah_id=${id}&radius_km=${radius}`);
+        const res = await fetch(`${BASE_URL}/02/backend/api/rumah_ibadah.php?action=jangkauan&id=${id}&radius=${radius}`);
         const json = await res.json();
         return json.data;
     }

@@ -1,10 +1,10 @@
-﻿<?php
+<?php
 /**
  * jalan.php
  * Tanggung Jawab: Menangani operasi CRUD untuk entitas Jalan (LineString).
  */
 
-require_once '../core_config/database.php';
+require_once __DIR__ . '/../../../webgis_app/core_config/database.php';
 require_once '../utils/response_helper.php';
 
 $pdo = Database::getConnection();

@@ -1,11 +1,11 @@
-﻿<?php
+<?php
 /**
  * statistik.php
  * Tanggung Jawab: Menyediakan data analisis spasial menggunakan Point in Polygon (ST_Contains).
  * Menghitung kepadatan warga miskin dalam setiap kavling.
  */
 
-require_once '../core_config/database.php';
+require_once __DIR__ . '/../../../webgis_app/core_config/database.php';
 require_once '../utils/response_helper.php';
 
 $pdo = Database::getConnection();
@@ -31,37 +31,25 @@ if ($method === 'GET') {
         $stmt = $pdo->query($sql);
         
         $features = [];
-        $total_warga = 0;
-        
         while ($row = $stmt->fetch()) {
             $jumlah = (int) $row['jumlah_warga'];
-            $total_warga += $jumlah;
             
             $features[] = [
                 'type' => 'Feature',
                 'geometry' => json_decode($row['geojson']),
                 'properties' => [
                     'id' => $row['id'],
+                    'nama' => $row['nama_pemilik'],
                     'nama_pemilik' => $row['nama_pemilik'],
                     'luas' => $row['luas'],
+                    'jumlah_warga_miskin' => $jumlah,
                     'jumlah_warga' => $jumlah,
                     'total_tanggungan' => (int) $row['total_tanggungan']
                 ]
             ];
         }
         
-        $response = [
-            'statistik' => [
-                'total_kavling' => count($features),
-                'total_warga_terpetakan' => $total_warga
-            ],
-            'geojson' => [
-                'type' => 'FeatureCollection',
-                'features' => $features
-            ]
-        ];
-        
-        sendSuccess($response, 'Data statistik spasial berhasil dihitung');
+        sendSuccess(['type' => 'FeatureCollection', 'features' => $features], 'Data statistik spasial berhasil dihitung');
     } catch (PDOException $e) {
         sendError('Gagal menghitung statistik spasial: ' . $e->getMessage(), 500);
     }

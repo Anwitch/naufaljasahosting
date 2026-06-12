@@ -1,10 +1,10 @@
-﻿<?php
+<?php
 /**
  * warga_miskin.php
  * Tanggung Jawab: Operasi CRUD untuk Warga Miskin.
  */
 
-require_once '../core_config/database.php';
+require_once __DIR__ . '/../../../webgis_app/core_config/database.php';
 require_once '../utils/response_helper.php';
 
 $pdo = Database::getConnection();

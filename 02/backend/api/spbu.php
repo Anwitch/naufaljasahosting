@@ -1,5 +1,5 @@
-﻿<?php
-require_once '../core_config/database.php';
+<?php
+require_once __DIR__ . '/../../../webgis_app/core_config/database.php';
 require_once '../utils/response_helper.php';
 
 $pdo = Database::getConnection();

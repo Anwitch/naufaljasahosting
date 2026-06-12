@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Singleton PDO connection.
  *
