@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Specific file mappings from old API names to new refactored endpoint names
+RewriteRule ^api/kawasan_kumuh\.php$ endpoints/api_kawasan.php [L,QSA]
+RewriteRule ^api/rumah_ibadah\.php$ endpoints/api_fasilitas.php [L,QSA]
+RewriteRule ^api/users\.php$ endpoints/api_pengguna.php [L,QSA]
+RewriteRule ^api/spbu_terdekat\.php$ endpoints/api_spbu_nearby.php [L,QSA]
+RewriteRule ^api/blank_spot\.php$ endpoints/area_blank.php [L,QSA]
+RewriteRule ^api/check_srid\.php$ endpoints/cek_srid.php [L,QSA]
+RewriteRule ^api/fix_srid\.php$ endpoints/perbaiki_srid.php [L,QSA]
+
+# General pattern mapping: api/filename.php -> endpoints/api_filename.php
+RewriteRule ^api/([a-zA-Z0-9_]+)\.php$ endpoints/api_$1.php [L,QSA]
