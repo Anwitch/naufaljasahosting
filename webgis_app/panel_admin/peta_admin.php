@@ -30,7 +30,7 @@ require_once __DIR__ . '/partials/header.php';
             <div class="layer-section-title">Infrastruktur</div>
 
             <label class="layer-item">
-                <input type="checkbox" id="ly-spbu" checked>
+                <input type="checkbox" id="ly-spbu">
                 <span class="layer-color layer-point" style="--layer-color:#F59E0B"><i class="fas fa-gas-pump"></i></span>
                 <span class="layer-text">
                     <span class="layer-name">SPBU</span>
@@ -39,7 +39,7 @@ require_once __DIR__ . '/partials/header.php';
             </label>
 
             <label class="layer-item">
-                <input type="checkbox" id="ly-jalan" checked>
+                <input type="checkbox" id="ly-jalan">
                 <span class="layer-color layer-line" style="--layer-color:#3B82F6"></span>
                 <span class="layer-text">
                     <span class="layer-name">Jalan</span>
@@ -48,7 +48,7 @@ require_once __DIR__ . '/partials/header.php';
             </label>
 
             <label class="layer-item">
-                <input type="checkbox" id="ly-kavling" checked>
+                <input type="checkbox" id="ly-kavling">
                 <span class="layer-color layer-area" style="--layer-color:#7C3AED"></span>
                 <span class="layer-text">
                     <span class="layer-name">Kavling / Parsil</span>
@@ -168,6 +168,6 @@ require_once __DIR__ . '/partials/header.php';
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
-<script src="<?= app_url('public_assets/js/peta-admin.js') ?>?v=20260612-fix"></script>
+<script src="<?= app_url('public_assets/js/peta-admin.js') ?>?v=<?= time() ?>"></script>
 <?php $extraScript = ''; ?>
 <?php require_once __DIR__ . '/partials/footer.php'; ?>

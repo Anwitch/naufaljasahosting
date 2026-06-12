@@ -52,6 +52,7 @@ try {
                 'deskripsi'   => $row['deskripsi'],
                 'buka_24_jam' => (bool) $row['buka_24_jam'],
                 'jarak_meter' => round($row['jarak_meter'], 2),
+                'jarak_km'    => round($row['jarak_meter'] / 1000, 2),
                 'created_at'  => $row['created_at'],
             ],
         ];

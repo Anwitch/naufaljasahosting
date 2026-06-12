@@ -2,14 +2,23 @@ export const renderForm = (type, geometry, onSubmit, onCancel) => {
     const container = document.getElementById('form-container');
     container.style.display = 'flex';
     
-    const extraFields = type === 'spbu' ? `
-        <div class="form-group">
-            <label class="checkbox-group">
-                <input type="checkbox" id="input-24jam">
-                <span>Buka 24 Jam</span>
-            </label>
-        </div>
-    ` : '';
+    let extraFields = '';
+    if (type === 'spbu') {
+        extraFields = `
+            <div class="form-group">
+                <label class="checkbox-group">
+                    <input type="checkbox" id="input-24jam">
+                    <span>Buka 24 Jam</span>
+                </label>
+            </div>
+        `;
+    } else if (type === 'kavling') {
+        extraFields = `
+            <div class="form-group">
+                <input type="number" id="input-luas" class="form-control" placeholder="Luas (m²)" required min="1">
+            </div>
+        `;
+    }
 
     container.innerHTML = `
         <div class="form-panel">
@@ -36,6 +45,7 @@ export const renderForm = (type, geometry, onSubmit, onCancel) => {
             deskripsi: document.getElementById('input-deskripsi').value,
         };
         if (type === 'spbu') payload.buka_24_jam = document.getElementById('input-24jam').checked;
+        if (type === 'kavling') payload.luas = document.getElementById('input-luas').value;
         
         onSubmit(payload);
         container.style.display = 'none';

@@ -29,17 +29,6 @@ window.showToast = (msg, type='success') => {
     setTimeout(() => { t.style.transform='translateX(100%)'; t.style.opacity=0; setTimeout(()=>t.remove(),300); }, 3000);
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-    appMap = initMap('map');
-    
-    // Bind extra draw events for 02
-    document.getElementById('btn-draw-rumah')?.addEventListener('click', () => { window.currentDrawType='rumah_ibadah'; new L.Draw.Marker(appMap).enable(); });
-    document.getElementById('btn-draw-warga')?.addEventListener('click', () => { window.currentDrawType='warga_miskin'; new L.Draw.Marker(appMap).enable(); });
-    
-    drawControl = setupDrawControls(appMap, handleGeometryCreated);
-    await loadAllData();
-});
-
 const loadAllData = async () => {
     try {
         const [spbu, jalan, kavling, rumah, warga] = await Promise.all([
@@ -47,11 +36,33 @@ const loadAllData = async () => {
             rumahIbadahService.getAll(), wargaMiskinService.getAll()
         ]);
         
-        L.geoJSON(spbu, { pointToLayer: (f, ll) => L.marker(ll, { icon: iconSPBU(f.properties.buka_24_jam) }), onEachFeature: (f, l) => bindPopup(l, 'spbu', f.properties) }).addTo(appMap);
-        L.geoJSON(jalan, { style: { color: '#F59E0B', weight: 4 }, onEachFeature: (f, l) => bindPopup(l, 'jalan', f.properties) }).addTo(appMap);
-        L.geoJSON(kavling, { style: { color: '#3B82F6', weight: 2, fillColor: '#3B82F6', fillOpacity: 0.3 }, onEachFeature: (f, l) => bindPopup(l, 'kavling', f.properties) }).addTo(appMap);
-        L.geoJSON(rumah, { pointToLayer: (f, ll) => L.marker(ll, { icon: iconRumah }), onEachFeature: (f, l) => bindPopup(l, 'rumah_ibadah', f.properties, f) }).addTo(appMap);
-        L.geoJSON(warga, { pointToLayer: (f, ll) => L.marker(ll, { icon: iconWarga }), onEachFeature: (f, l) => bindPopup(l, 'warga_miskin', f.properties) }).addTo(appMap);
+        const spbuLayer = L.geoJSON(spbu, { pointToLayer: (f, ll) => L.marker(ll, { icon: iconSPBU(f.properties.buka_24_jam) }), onEachFeature: (f, l) => bindPopup(l, 'spbu', f.properties) }).addTo(appMap);
+        const jalanLayer = L.geoJSON(jalan, { style: { color: '#F59E0B', weight: 4 }, onEachFeature: (f, l) => bindPopup(l, 'jalan', f.properties) }).addTo(appMap);
+        const kavlingLayer = L.geoJSON(kavling, { style: { color: '#3B82F6', weight: 2, fillColor: '#3B82F6', fillOpacity: 0.3 }, onEachFeature: (f, l) => bindPopup(l, 'kavling', f.properties) }).addTo(appMap);
+        const rumahLayer = L.geoJSON(rumah, { pointToLayer: (f, ll) => L.marker(ll, { icon: iconRumah }), onEachFeature: (f, l) => bindPopup(l, 'rumah_ibadah', f.properties, f) }).addTo(appMap);
+        const wargaLayer = L.geoJSON(warga, { pointToLayer: (f, ll) => L.marker(ll, { icon: iconWarga }), onEachFeature: (f, l) => bindPopup(l, 'warga_miskin', f.properties) }).addTo(appMap);
+
+        // Bind checkbox events
+        document.getElementById('layer-spbu').addEventListener('change', (e) => {
+            if (e.target.checked) appMap.addLayer(spbuLayer);
+            else appMap.removeLayer(spbuLayer);
+        });
+        document.getElementById('layer-jalan').addEventListener('change', (e) => {
+            if (e.target.checked) appMap.addLayer(jalanLayer);
+            else appMap.removeLayer(jalanLayer);
+        });
+        document.getElementById('layer-kavling').addEventListener('change', (e) => {
+            if (e.target.checked) appMap.addLayer(kavlingLayer);
+            else appMap.removeLayer(kavlingLayer);
+        });
+        document.getElementById('layer-rumah').addEventListener('change', (e) => {
+            if (e.target.checked) appMap.addLayer(rumahLayer);
+            else appMap.removeLayer(rumahLayer);
+        });
+        document.getElementById('layer-warga').addEventListener('change', (e) => {
+            if (e.target.checked) appMap.addLayer(wargaLayer);
+            else appMap.removeLayer(wargaLayer);
+        });
     } catch (e) {
         window.showToast("Gagal meload data: "+e.message, 'error');
     }
@@ -115,10 +126,34 @@ const handleGeometryCreated = (type, geometry, layer) => {
         try {
             if(type==='spbu') await spbuService.create(payload);
             if(type==='jalan') await jalanService.create(payload);
-            if(type==='kavling') await kavlingService.create(payload);
+            if(type==='kavling') {
+                const kavlingPayload = {
+                    nama_pemilik: payload.nama,
+                    luas: payload.luas || 0,
+                    geometry: payload.geometry
+                };
+                await kavlingService.create(kavlingPayload);
+            }
             if(type==='rumah_ibadah') await rumahIbadahService.create(payload);
             if(type==='warga_miskin') await wargaMiskinService.create(payload);
             window.showToast('Tersimpan'); setTimeout(()=>location.reload(), 800);
         } catch(e) { window.showToast('Gagal simpan', 'error'); }
     }, () => appMap.removeLayer(tempLayer));
 };
+
+const init = async () => {
+    appMap = initMap('map');
+    
+    // Bind extra draw events for 02
+    document.getElementById('btn-draw-rumah')?.addEventListener('click', () => { window.currentDrawType='rumah_ibadah'; new L.Draw.Marker(appMap).enable(); });
+    document.getElementById('btn-draw-warga')?.addEventListener('click', () => { window.currentDrawType='warga_miskin'; new L.Draw.Marker(appMap).enable(); });
+    
+    drawControl = setupDrawControls(appMap, handleGeometryCreated);
+    await loadAllData();
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}

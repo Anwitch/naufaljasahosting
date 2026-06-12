@@ -61,28 +61,112 @@ CREATE TABLE spbu (
 
 INSERT INTO spbu (nama, deskripsi, buka_24_jam, geom) VALUES
     (
-        'SPBU Bundaran Digulis Untan',
-        'SPBU terdekat dari kampus',
+        'SPBU COCO 61.781.01 Ahmad Yani',
+        'Jl. Jend. Ahmad Yani No.3, Pontianak (Dekat Bundaran Digulis Untan)',
         1,
-        ST_GeomFromText('POINT(109.3440 -0.0565)')
+        ST_GeomFromText('POINT(109.344381 -0.056461)')
     ),
     (
-        'SPBU Ahmad Yani',
-        'Dekat Mega Mall (24 Jam)',
+        'SPBU 64.781.11 Imam Bonjol',
+        'Jl. Imam Bonjol No.30, Pontianak Tenggara',
         1,
-        ST_GeomFromText('POINT(109.3360 -0.0450)')
+        ST_GeomFromText('POINT(109.349692 -0.038148)')
     ),
     (
-        'SPBU Imam Bonjol',
-        'SPBU pinggir kota',
-        0,
-        ST_GeomFromText('POINT(109.3410 -0.0380)')
+        'SPBU 64.781.06 Kota Baru',
+        'Jl. Prof. Dr. M. Yamin, Kota Baru, Pontianak Selatan',
+        1,
+        ST_GeomFromText('POINT(109.317589 -0.054378)')
     ),
     (
-        'SPBU Kota Baru',
-        'Jl. Sultan Abdurrahman',
+        'SPBU 64.781.01 Adi Sucipto',
+        'Jl. Adi Sucipto, Pontianak Tenggara',
         0,
-        ST_GeomFromText('POINT(109.3245 -0.0487)')
+        ST_GeomFromText('POINT(109.362241 -0.061730)')
+    ),
+    (
+        'SPBU 64.781.03 KH. Ahmad Dahlan',
+        'Jl. KH. Ahmad Dahlan No.12, Pontianak Kota',
+        0,
+        ST_GeomFromText('POINT(109.333830 -0.033621)')
+    ),
+    (
+        'SPBU 64.781.05 Tanjung Pura',
+        'Jl. Tanjung Pura, Pontianak Selatan',
+        1,
+        ST_GeomFromText('POINT(109.336184 -0.026788)')
+    ),
+    (
+        'SPBU 64.781.12 Gusti Hamzah',
+        'Jl. Gusti Hamzah (Pancasila), Pontianak Kota',
+        0,
+        ST_GeomFromText('POINT(109.319760 -0.029415)')
+    ),
+    (
+        'SPBU 64.781.14 Husein Hamzah',
+        'Jl. Husein Hamzah (Pal 3), Pontianak Barat',
+        0,
+        ST_GeomFromText('POINT(109.294121 -0.027963)')
+    ),
+    (
+        'SPBU 64.781.15 RE Martadinata',
+        'Jl. RE Martadinata, Pontianak Barat',
+        0,
+        ST_GeomFromText('POINT(109.314227 -0.016335)')
+    ),
+    (
+        'SPBU 63.781.02 28 Oktober',
+        'Jl. 28 Oktober, Pontianak Utara',
+        0,
+        ST_GeomFromText('POINT(109.366405 0.007621)')
+    ),
+    (
+        'SPBU 64.782.01 Khatulistiwa',
+        'Jl. Khatulistiwa, Pontianak Utara',
+        1,
+        ST_GeomFromText('POINT(109.325983 0.035415)')
+    ),
+    (
+        'SPBU OSO MT. Haryono',
+        'Jl. Letjen MT Haryono, Pontianak Selatan',
+        0,
+        ST_GeomFromText('POINT(109.3367485 -0.0448924)')
+    ),
+    (
+        'SPBU 64.781.18 Danau Sentarum',
+        'Jl. Danau Sentarum, Pontianak Kota',
+        0,
+        ST_GeomFromText('POINT(109.311283 -0.046342)')
+    ),
+    (
+        'SPBU 64.781.19 Serdam',
+        'Jl. Sungai Raya Dalam, Pontianak Tenggara',
+        0,
+        ST_GeomFromText('POINT(109.358241 -0.076389)')
+    ),
+    (
+        'SPBU 64.781.02 Hasanuddin',
+        'Jl. Hasanuddin, Pontianak Barat',
+        0,
+        ST_GeomFromText('POINT(109.321873 -0.024502)')
+    ),
+    (
+        'SPBU 64.781.21 Dr. Wahidin',
+        'Jl. Dr. Wahidin S., Pontianak Kota',
+        0,
+        ST_GeomFromText('POINT(109.308210 -0.034502)')
+    ),
+    (
+        'SPBU 64.781.17 Komyos Sudarso',
+        'Jl. Komodor Yos Sudarso, Pontianak Barat',
+        0,
+        ST_GeomFromText('POINT(109.299100 -0.019500)')
+    ),
+    (
+        'SPBU 64.781.19 HOS Cokroaminoto',
+        'Jl. HOS Cokroaminoto, Pontianak Kota',
+        1,
+        ST_GeomFromText('POINT(109.337500 -0.031500)')
     );
 
 CREATE TABLE rumah_ibadah (
@@ -100,25 +184,49 @@ INSERT INTO rumah_ibadah (nama, agama, radius_bantuan_meter, geom) VALUES
         'Masjid Raya Mujahidin',
         'Islam',
         1000,
-        ST_GeomFromText('POINT(109.3356 -0.0454)')
+        ST_GeomFromText('POINT(109.3377 -0.0414)')
     ),
     (
-        'Gereja Katedral St. Yosef',
+        'Masjid Jami Sultan Syarif Abdurrahman',
+        'Islam',
+        1000,
+        ST_GeomFromText('POINT(109.3522 -0.0229)')
+    ),
+    (
+        'Gereja Katedral Santo Yosef',
         'Katolik',
         1000,
-        ST_GeomFromText('POINT(109.3368 -0.0298)')
+        ST_GeomFromText('POINT(109.3384 -0.0274)')
+    ),
+    (
+        'Gereja Kristen Immanuel (GPIB)',
+        'Kristen',
+        1000,
+        ST_GeomFromText('POINT(109.3375 -0.0292)')
+    ),
+    (
+        'Gereja GKKB Pontianak',
+        'Kristen',
+        1000,
+        ST_GeomFromText('POINT(109.3386 -0.0336)')
     ),
     (
         'Vihara Bodhisatva Karaniya Metta',
         'Buddha',
         1000,
-        ST_GeomFromText('POINT(109.3468 -0.0233)')
+        ST_GeomFromText('POINT(109.3432 -0.0215)')
     ),
     (
-        'Masjid Jami Keraton Kadriyah',
-        'Islam',
+        'Maha Vihara Maitreya',
+        'Buddha',
         1000,
-        ST_GeomFromText('POINT(109.3523 -0.0229)')
+        ST_GeomFromText('POINT(109.3649 -0.0732)')
+    ),
+    (
+        'Pura Giripati Mulawarman',
+        'Hindu',
+        1000,
+        ST_GeomFromText('POINT(109.3802 -0.0663)')
     );
 
 CREATE TABLE jalan (
@@ -132,19 +240,44 @@ CREATE TABLE jalan (
 
 INSERT INTO jalan (nama, jenis_jalan, geom) VALUES
     (
-        'Jalan Ahmad Yani',
+        'Jalan Jenderal Ahmad Yani',
         'Arteri Primer',
-        ST_GeomFromText('LINESTRING(109.3448 -0.0583, 109.3360 -0.0450, 109.3310 -0.0320)')
+        ST_GeomFromText('LINESTRING(109.3621 -0.0768, 109.3444 -0.0565, 109.3360 -0.0450, 109.3330 -0.0330)')
     ),
     (
         'Jalan Gajah Mada',
-        'Kolektor',
-        ST_GeomFromText('LINESTRING(109.3310 -0.0320, 109.3410 -0.0290, 109.3460 -0.0250)')
+        'Arteri Primer',
+        ST_GeomFromText('LINESTRING(109.3310 -0.0320, 109.3380 -0.0290, 109.3450 -0.0250)')
+    ),
+    (
+        'Jalan Tanjung Pura',
+        'Arteri Primer',
+        ST_GeomFromText('LINESTRING(109.3300 -0.0300, 109.3360 -0.0260, 109.3480 -0.0240, 109.3550 -0.0270)')
     ),
     (
         'Jalan Imam Bonjol',
-        'Lokal',
-        ST_GeomFromText('LINESTRING(109.3360 -0.0450, 109.3420 -0.0400, 109.3500 -0.0350)')
+        'Arteri Primer',
+        ST_GeomFromText('LINESTRING(109.3360 -0.0450, 109.3420 -0.0400, 109.3500 -0.0350, 109.3590 -0.0400)')
+    ),
+    (
+        'Jalan Adi Sucipto',
+        'Arteri Primer',
+        ST_GeomFromText('LINESTRING(109.3590 -0.0400, 109.3650 -0.0600, 109.3750 -0.0700)')
+    ),
+    (
+        'Jalan Khatulistiwa',
+        'Arteri Primer',
+        ST_GeomFromText('LINESTRING(109.3450 0.0050, 109.3350 0.0150, 109.3250 0.0350, 109.3150 0.0550)')
+    ),
+    (
+        'Jalan Komodor Yos Sudarso',
+        'Arteri Primer',
+        ST_GeomFromText('LINESTRING(109.3250 -0.0280, 109.3150 -0.0240, 109.3000 -0.0180, 109.2850 -0.0150)')
+    ),
+    (
+        'Jalan Prof. M. Yamin',
+        'Arteri Primer',
+        ST_GeomFromText('LINESTRING(109.3245 -0.0487, 109.3170 -0.0540, 109.3050 -0.0620)')
     );
 
 CREATE TABLE kavling (

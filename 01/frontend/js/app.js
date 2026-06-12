@@ -6,6 +6,13 @@ import { spbuService, jalanService, kavlingService } from './services/api.servic
 let appMap;
 let drawControl;
 
+// Global layer object tracker
+const mapLayers = {
+    spbu: null,
+    jalan: null,
+    kavling: null
+};
+
 // Custom SVG Icons Generator
 export const createIcon = (svgPath, color) => {
     return L.divIcon({
@@ -29,28 +36,94 @@ window.showToast = (msg, type='success') => {
     setTimeout(() => { t.style.transform='translateX(100%)'; t.style.opacity=0; setTimeout(()=>t.remove(),300); }, 3000);
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-    appMap = initMap('map');
-    drawControl = setupDrawControls(appMap, handleGeometryCreated);
-    await loadAllData();
-});
+const setupCheckboxListeners = () => {
+    const layerConfigs = [
+        { id: 'layer-spbu', key: 'spbu' },
+        { id: 'layer-jalan', key: 'jalan' },
+        { id: 'layer-kavling', key: 'kavling' }
+    ];
 
-const loadAllData = async () => {
+    layerConfigs.forEach(({ id, key }) => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+            checkbox.addEventListener('change', (e) => {
+                const layer = mapLayers[key];
+                if (layer) {
+                    if (e.target.checked) {
+                        if (!appMap.hasLayer(layer)) {
+                            appMap.addLayer(layer);
+                        }
+                    } else {
+                        if (appMap.hasLayer(layer)) {
+                            appMap.removeLayer(layer);
+                        }
+                    }
+                }
+            });
+        }
+    });
+};
+
+const loadSPBUData = async () => {
     try {
         const spbu = await spbuService.getAll();
-        L.geoJSON(spbu, {
+        mapLayers.spbu = L.geoJSON(spbu, {
             pointToLayer: (f, latlng) => L.marker(latlng, { icon: iconSPBU(f.properties.buka_24_jam) }),
             onEachFeature: (f, l) => bindPopup(l, 'spbu', f.properties)
-        }).addTo(appMap);
-
-        const jalan = await jalanService.getAll();
-        L.geoJSON(jalan, { style: { color: '#F59E0B', weight: 4 }, onEachFeature: (f, l) => bindPopup(l, 'jalan', f.properties) }).addTo(appMap);
-
-        const kavling = await kavlingService.getAll();
-        L.geoJSON(kavling, { style: { color: '#3B82F6', weight: 2, fillColor: '#3B82F6', fillOpacity: 0.3 }, onEachFeature: (f, l) => bindPopup(l, 'kavling', f.properties) }).addTo(appMap);
+        });
+        
+        const checkbox = document.getElementById('layer-spbu');
+        if (checkbox && checkbox.checked) {
+            mapLayers.spbu.addTo(appMap);
+        }
     } catch (e) {
-        window.showToast("Gagal meload data: "+e.message, 'error');
+        console.error("Gagal meload data SPBU:", e);
+        window.showToast("Gagal meload data SPBU: " + e.message, 'error');
     }
+};
+
+const loadJalanData = async () => {
+    try {
+        const jalan = await jalanService.getAll();
+        mapLayers.jalan = L.geoJSON(jalan, {
+            style: { color: '#F59E0B', weight: 4 },
+            onEachFeature: (f, l) => bindPopup(l, 'jalan', f.properties)
+        });
+        
+        const checkbox = document.getElementById('layer-jalan');
+        if (checkbox && checkbox.checked) {
+            mapLayers.jalan.addTo(appMap);
+        }
+    } catch (e) {
+        console.error("Gagal meload data Jalan:", e);
+        window.showToast("Gagal meload data Jalan: " + e.message, 'error');
+    }
+};
+
+const loadKavlingData = async () => {
+    try {
+        const kavling = await kavlingService.getAll();
+        mapLayers.kavling = L.geoJSON(kavling, {
+            style: { color: '#3B82F6', weight: 2, fillColor: '#3B82F6', fillOpacity: 0.3 },
+            onEachFeature: (f, l) => bindPopup(l, 'kavling', f.properties)
+        });
+        
+        const checkbox = document.getElementById('layer-kavling');
+        if (checkbox && checkbox.checked) {
+            mapLayers.kavling.addTo(appMap);
+        }
+    } catch (e) {
+        console.error("Gagal meload data Kavling:", e);
+        window.showToast("Gagal meload data Kavling: " + e.message, 'error');
+    }
+};
+
+const loadAllData = async () => {
+    await Promise.allSettled([
+        loadSPBUData(),
+        loadJalanData(),
+        loadKavlingData()
+    ]);
 };
 
 const bindPopup = (layer, type, props) => {
@@ -82,7 +155,14 @@ const handleGeometryCreated = (type, geometry, layer) => {
         try {
             if(type==='spbu') await spbuService.create(payload);
             if(type==='jalan') await jalanService.create(payload);
-            if(type==='kavling') await kavlingService.create(payload);
+            if(type==='kavling') {
+                const kavlingPayload = {
+                    nama_pemilik: payload.nama,
+                    luas: payload.luas || 0,
+                    geometry: payload.geometry
+                };
+                await kavlingService.create(kavlingPayload);
+            }
             window.showToast('Berhasil disimpan');
             setTimeout(()=>location.reload(), 800);
         } catch(e) { window.showToast('Gagal simpan', 'error'); }
@@ -90,3 +170,16 @@ const handleGeometryCreated = (type, geometry, layer) => {
         appMap.removeLayer(tempLayer);
     });
 };
+
+const init = async () => {
+    appMap = initMap('map');
+    setupCheckboxListeners();
+    drawControl = setupDrawControls(appMap, handleGeometryCreated);
+    await loadAllData();
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}

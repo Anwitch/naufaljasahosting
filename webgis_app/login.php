@@ -603,7 +603,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="left-footer">
-                    D1041231071 — Naufal Zaky Ramadhan &copy; 2025
+                    D1041231071 — Naufal Zaky Ramadhan &copy; 2026
                 </div>
             </div>
 

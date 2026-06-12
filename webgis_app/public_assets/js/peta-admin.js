@@ -469,22 +469,28 @@ async function findNearestSpbu() {
     try {
         const r = await fetch(`${API}/spbu_terdekat.php?lat=${center.lat}&lng=${center.lng}`);
         const j = await r.json();
-        if (j.status === 'success' && j.data) {
-            const p = j.data.properties;
-            const coords = j.data.geometry.coordinates;
-            const html = `<div class="spbu-result">
-                <div class="spbu-result-name">⛽ ${p.nama}</div>
-                <div class="spbu-result-meta">${p.buka_24_jam ? '🟢 24 Jam' : '🟡 Terbatas'}</div>
-                <div class="spbu-result-distance">${p.jarak_km} km</div>
-            </div>`;
-            document.getElementById('spbuPanelResult').innerHTML = html;
+        if (j.status === 'success' && j.data && j.data.features && j.data.features.length > 0) {
+            const feature = j.data.features[0];
+            if (feature && feature.geometry && feature.geometry.coordinates) {
+                const p = feature.properties;
+                const coords = feature.geometry.coordinates;
+                const jarakVal = p.jarak_km !== undefined ? p.jarak_km : (p.jarak_meter / 1000).toFixed(2);
+                const html = `<div class="spbu-result">
+                    <div class="spbu-result-name">⛽ ${p.nama}</div>
+                    <div class="spbu-result-meta">${p.buka_24_jam ? '🟢 24 Jam' : '🟡 Terbatas'}</div>
+                    <div class="spbu-result-distance">${jarakVal} km</div>
+                </div>`;
+                document.getElementById('spbuPanelResult').innerHTML = html;
 
-            // Show marker
-            if (state.layers.spbuRoute) state.map.removeLayer(state.layers.spbuRoute);
-            state.layers.spbuRoute = L.marker([coords[1], coords[0]], { icon: ICONS.spbu }).addTo(state.map)
-                .bindPopup(`<b>${p.nama}</b><br>${p.jarak_km} km dari pusat peta`).openPopup();
+                // Show marker
+                if (state.layers.spbuRoute) state.map.removeLayer(state.layers.spbuRoute);
+                state.layers.spbuRoute = L.marker([coords[1], coords[0]], { icon: p.buka_24_jam ? ICONS.spbu24 : ICONS.spbu }).addTo(state.map)
+                    .bindPopup(`<b>${p.nama}</b><br>${jarakVal} km dari pusat peta`).openPopup();
+            } else {
+                document.getElementById('spbuPanelResult').innerHTML = `<div class="spbu-result">Data geometri SPBU terdekat tidak valid.</div>`;
+            }
         } else {
-            document.getElementById('spbuPanelResult').innerHTML = `<div class="spbu-result">${j.message || 'Tidak ada SPBU'}</div>`;
+            document.getElementById('spbuPanelResult').innerHTML = `<div class="spbu-result">${j.message || 'Tidak ada SPBU dalam jangkauan'}</div>`;
         }
     } catch (e) {
         document.getElementById('spbuPanelResult').innerHTML = `<div class="spbu-result">Error: ${e.message}</div>`;

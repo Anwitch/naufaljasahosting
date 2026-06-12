@@ -27,14 +27,18 @@ if ($method !== 'GET') {
 }
 
 try {
+    date_default_timezone_set('Asia/Jakarta');
     $stmt = $pdo->query(
         "SELECT
-            COUNT(*) AS total,
-            SUM(buka_24_jam = 1) AS buka_24_jam,
-            SUM(buka_24_jam = 0) AS tidak_24_jam
+            COUNT(*) AS total_spbu,
+            COALESCE(SUM(buka_24_jam = 1), 0) AS spbu_buka,
+            COALESCE(SUM(buka_24_jam = 0), 0) AS spbu_tutup
          FROM spbu"
     );
-    $summary = $stmt->fetch();
+    $summary = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($summary) {
+        $summary['server_time'] = date('Y-m-d H:i:s');
+    }
     sendSuccess($summary, 'Status SPBU berhasil diambil');
 } catch (PDOException $e) {
     sendError('Gagal mengambil status SPBU: ' . $e->getMessage(), 500);

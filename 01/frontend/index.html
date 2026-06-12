@@ -10,6 +10,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <script>
+        // Global error interceptor to assist in visual debugging
+        window.onerror = function(message, source, lineno, colno, error) {
+            const errorMsg = `JS Error: ${message} (at ${source ? source.split('/').pop() : 'unknown'}:${lineno}:${colno})`;
+            console.error(errorMsg, error);
+            const showInterval = setInterval(() => {
+                const toastContainer = document.getElementById('toast-container');
+                if (toastContainer) {
+                    clearInterval(showInterval);
+                    const t = document.createElement('div');
+                    t.className = 'toast error';
+                    t.innerHTML = errorMsg;
+                    toastContainer.appendChild(t);
+                }
+            }, 100);
+            return false;
+        };
+        window.onunhandledrejection = function(event) {
+            const errorMsg = `Promise Error: ${event.reason?.message || event.reason}`;
+            console.error(errorMsg, event.reason);
+            const showInterval = setInterval(() => {
+                const toastContainer = document.getElementById('toast-container');
+                if (toastContainer) {
+                    clearInterval(showInterval);
+                    const t = document.createElement('div');
+                    t.className = 'toast error';
+                    t.innerHTML = errorMsg;
+                    toastContainer.appendChild(t);
+                }
+            }, 100);
+        };
+    </script>
 </head>
 <body>
 
@@ -36,6 +68,25 @@
         <div class="header">
             <h2>P01: Geometri Dasar</h2>
             <p>Sistem Informasi Geografis — CRUD spasial titik, garis, dan area.</p>
+        </div>
+
+        <!-- Layer Peta (Centang) -->
+        <div class="menu-group">
+            <div class="menu-title">Layer Peta</div>
+            <div class="form-panel" style="gap: 10px;">
+                <label class="checkbox-group">
+                    <input type="checkbox" id="layer-spbu" checked>
+                    <span>Stasiun SPBU</span>
+                </label>
+                <label class="checkbox-group">
+                    <input type="checkbox" id="layer-jalan" checked>
+                    <span>Jalur Jalan</span>
+                </label>
+                <label class="checkbox-group">
+                    <input type="checkbox" id="layer-kavling" checked>
+                    <span>Kavling Tanah</span>
+                </label>
+            </div>
         </div>
 
         <!-- Spatial tools -->
@@ -85,7 +136,7 @@
             icon.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
     </script>
-    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/app.js?v=20260613-9"></script>
 
 </body>
 </html>
