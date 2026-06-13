@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once '../core_config/database.php';
 require_once '../utils/response_helper.php';
 

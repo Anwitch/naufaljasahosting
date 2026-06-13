@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * kavling.php
  * Tanggung Jawab: Menangani operasi CRUD untuk entitas Kavling (Polygon).

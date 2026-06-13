@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * warga_miskin.php
  * Tanggung Jawab: Operasi CRUD untuk Warga Miskin.

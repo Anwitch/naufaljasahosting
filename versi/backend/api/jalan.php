@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * jalan.php
  * Tanggung Jawab: Menangani operasi CRUD untuk entitas Jalan (LineString).

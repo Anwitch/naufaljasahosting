@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * rumah_ibadah.php
  * Tanggung Jawab: Operasi CRUD Rumah Ibadah + Endpoint analisis jangkauan Haversine.

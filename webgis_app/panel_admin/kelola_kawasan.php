@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/../core_config/database.php';
 require_once __DIR__ . '/../core_config/middleware_auth.php';
 requireRole('admin');

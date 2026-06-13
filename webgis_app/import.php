@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once __DIR__ . '/core_config/settings.php';
 
 $host = getenv('DB_HOST') ?: 'localhost';

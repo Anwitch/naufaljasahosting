@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * statistik.php
  * Tanggung Jawab: Menyediakan data analisis spasial menggunakan Point in Polygon (ST_Contains).
