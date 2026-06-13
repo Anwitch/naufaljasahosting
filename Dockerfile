@@ -12,6 +12,9 @@ COPY 01/ /var/www/html/01/
 COPY 02/ /var/www/html/02/
 COPY 03/ /var/www/html/03/
 
+# Copy db schema to where submodules expect it
+RUN mkdir -p /var/www/html/database && cp /var/www/html/db_scripts/webgis_naufal_zaky.sql /var/www/html/database/webgis_db.sql
+
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && find /var/www/html -type d -exec chmod 755 {} \; \

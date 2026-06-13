@@ -1,0 +1,33 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: webgis_db_naufal
+      DB_USERNAME: root
+      DB_PASSWORD: naufalDatabase123
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: naufalDatabase123
+      MARIADB_DATABASE: webgis_db_naufal
+    volumes:
+      - db_data_naufal:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -uroot -pnaufalDatabase123 --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  db_data_naufal:
