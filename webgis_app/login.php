@@ -562,7 +562,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Top bar -->
     <div class="topbar">
-        <a href="../portal.html" class="btn-back" id="backToPortal">
+        <a href="<?= root_url('portal.html') ?>" class="btn-back" id="backToPortal">
             <i class="fas fa-chevron-left"></i>
             Kembali ke Portal
         </a>

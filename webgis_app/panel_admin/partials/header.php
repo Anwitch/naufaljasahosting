@@ -108,7 +108,7 @@ $initial = strtoupper(substr($user['nama_lengkap'] ?: $user['username'], 0, 1));
             <button class="btn btn-ghost btn-sm" id="adminThemeToggle" title="Toggle tema" aria-label="Toggle dark/light mode" style="padding:8px 10px;">
                 <i class="fas fa-moon" id="adminThemeIcon"></i>
             </button>
-            <a href="<?= app_url('../portal.html') ?>" class="btn btn-ghost btn-sm" title="Kembali ke Portal WebGIS">
+            <a href="<?= root_url('portal.html') ?>" class="btn btn-ghost btn-sm" title="Kembali ke Portal WebGIS">
                 <i class="fas fa-home"></i> Portal
             </a>
         </div>

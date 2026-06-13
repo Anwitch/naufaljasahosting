@@ -6,6 +6,7 @@ RUN docker-php-ext-install pdo_mysql mysqli \
 
 # Copy application files
 COPY portal.html /var/www/html/index.html
+COPY portal.html /var/www/html/portal.html
 COPY webgis_app/ /var/www/html/webgis_app/
 COPY db_scripts/ /var/www/html/db_scripts/
 COPY 01/ /var/www/html/01/

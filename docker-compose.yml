@@ -10,6 +10,7 @@ services:
       DB_DATABASE: webgis_db_naufal
       DB_USERNAME: root
       DB_PASSWORD: naufalDatabase123
+      APP_BASE_PATH: /webgis_app
     depends_on:
       db:
         condition: service_healthy
